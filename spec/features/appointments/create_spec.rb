@@ -51,4 +51,39 @@ describe "creating appointments" do
     expect(page).to have_content("Listing Appointments Title Description New Appointment")
   end
     
+  it "displays an error when the appointment has no description" do
+    expect(Appointment.count).to eq(0)
+    
+    visit "/appointments"
+    click_link "New Appointment"
+    expect(page).to have_content("New Appointment")
+    
+    fill_in "Title", with: "Listing Appointments Title Description New Appointment"
+    fill_in "Description", with: ""
+    click_button "Create Appointment"
+    
+    expect(page).to have_content("error")
+    expect(Appointment.count).to eq(0)
+    
+    visit "/appointments"
+    expect(page).to have_content("Listing Appointments Title Description New Appointment")
+  end
+    
+  it "displays an error when the appointment has no description" do
+    expect(Appointment.count).to eq(0)
+    
+    visit "/appointments"
+    click_link "New Appointment"
+    expect(page).to have_content("New Appointment")
+    
+    fill_in "Title", with: "Listing Appointments Title Description New Appointment"
+    fill_in "Description", with: "Dis"
+    click_button "Create Appointment"
+    
+    expect(page).to have_content("error")
+    expect(Appointment.count).to eq(0)
+    
+    visit "/appointments"
+    expect(page).to have_content("Listing Appointments Title Description New Appointment")
+  end
 end

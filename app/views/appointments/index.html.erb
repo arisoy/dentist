@@ -13,7 +13,7 @@
 
   <tbody>
     <% @appointments.each do |appointment| %>
-      <tr>
+      <tr id="<%= dom_id(appointment) %>">
         <td><%= appointment.title %></td>
         <td><%= appointment.description %></td>
         <td><%= link_to 'Show', appointment %></td>
